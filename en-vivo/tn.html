@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+<head>
+<title>TN Noticias en vivo - A Puro Fútbol</title>
+<meta property="og:locale" content="es_ES" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="A Puro Fútbol" />
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+<meta name="msapplication-TileImage" content="https://apurofutbol.net/favicon.png">
+
+<meta name="description" content="Ver canal Win Sports Premium en vivo y en directo online. En A Puro Fútbol mira todos los partidos gratis por Internet">
+<meta property="og:title" content="Click para ver canal Win Sports Premium en VIVO y en DIRECTO por Internet gratis - A Puro Fútbol" />
+<meta property="og:description" content="A Puro Fútbol. Ver canal Win Sports Premium en VIVO y en directo ONLINE gratis por Internet" />
+<meta property="og:url" content="https://apurofutbol.net/en-vivo/win-sports-premium" />
+<link rel="canonical" href="https://apurofutbol.net/en-vivo/win-sports-premium" />
+<meta property="og:image" content="https://apurofutbol.net/img/logo-canal/Win_Sports_Premium.webp?" />
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $.get("https://apurofutbol.net/html/head.html", function(data) {
+                $("head").append(data);
+            });
+        });
+    </script>
+ </head>
+ 
+
+<body>
+
+<div id="header"></div>
+	<script>
+            $(document).ready(function() {
+                $("#header").load("https://apurofutbol.net/html/header.html");
+            });
+         </script>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Columna principal (75% de ancho en pantallas anchas, 100% de ancho en pantallas peque as) -->
+            <div class="col-md-9 col-sm-12 order-sm-1 p-0 m-0 col-custom col-main" style="background-color: #f0f0f0;">
+
+<div class="options">
+<!-- Comienzo Botones OPCIONES-->
+  <a class="btn" href="https://www.youtube.com/embed/cb12KmMMDJA?si=fLzZL_bHz1uJYk-9" target="iframe" rel="noopener">OPCION 1</a>
+
+ <!-- Fin Botones -->
+</div>
+
+		 <!-- Columna principal REPRODUCTOR -->
+                <div class="embed-responsive embed-responsive-16by9" bis_skin_checked="1">
+                    <iframe id="iframe" allow="autoplay *; encrypted-media *;" class="embed-responsive-item" width="100%" height="100%" src="
+                    https://www.youtube.com/embed/cb12KmMMDJA?si=fLzZL_bHz1uJYk-9" name="iframe" frameborder="0" scrolling="no" allowfullscreen="">Cargando reproductor</iframe>
+                </div>
+
+            </div>
+
+            <!-- Columna secundaria CHAT -->
+            <div class="col-md-3 col-sm-12 order-sm-2 p-0 m-0 col-custom col-sidebar" style="background-color: #dcdcdc; height: 100vh">
+
+<iframe id="miIframe" scrolling="no" width="100%" height="100%" allowfullscreen="" src=""></iframe>
+
+<script>
+    // Función para obtener el valor del parámetro de la URL
+    function obtenerParametroUrl(nombre) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(nombre);
+    }
+
+    // Obtener el valor del parámetro "id" de la URL
+    var videoId = obtenerParametroUrl("id");
+
+    // Asignar el valor del parámetro "id" al src del iframe en chat.html
+    $("#miIframe").attr("src", "https://apurofutbol.net/chat/chatsmart.html?id=" + encodeURIComponent(videoId));
+</script>
+
+  
+            </div>
+        </div>
+    </div>
+
+<div id="ads"></div>
+<script>
+            $(document).ready(function() {
+                $("#ads").load("https://apurofutbol.net/html/ads.html");
+            });
+         </script>
+</div>
+
+<br><br>
+
+<div class="container">   
+    <p align="center">
+<img src="https://apurofutbol.net/img/logo-canal/Tn_logo12.png" alt="Logo de TN Noticias Online" title="Ver TN Noticias en VIVO y en directo">
+</p>
+
+    <h1>Todo Noticias (TN)</h1>
+
+    <p>Todo Noticias (TN), un canal de televisión por suscripción argentino, ha consolidado su posición como referente en la cobertura de actualidad en el país. Operado por Arte Radiotelevisivo Argentino, una subsidiaria del Grupo Clarín, TN se destaca por su enfoque en noticieros continuos, ofreciendo una programación diversa que abarca música, tecnología, política, deportes, relatos, investigaciones, economía, espectáculos y más.</p>
+
+    <p>Con una audiencia considerable, TN ha logrado posicionarse como el canal de noticias más visto en Argentina, según datos de IBOPE, superando a competidores como C5N y A24. Su impacto en la sociedad se refleja en su capacidad para mantenerse relevante y atractivo para un amplio espectro de espectadores.</p>
+
+    <p>Formando parte de la Alianza Informativa Latinoamericana junto con El Trece, TN contribuye al intercambio de información y noticias a nivel regional a través del grupo de medios de Artear. Este canal se presenta como un punto de encuentro para aquellos que buscan mantenerse informados sobre los acontecimientos más destacados de Argentina y el resto de Latinoamérica.</p>
+
+    <p>Con una sólida reputación y una oferta variada de contenidos, TN sigue siendo una fuente confiable y entretenida para aquellos que buscan estar al tanto de los desarrollos más recientes en diversos campos, consolidando así su posición como líder en el panorama mediático argentino.</p>
+</div>  
+      
+      
+      
+
+
+
+
+<div id="ads"></div>
+<script>
+            $(document).ready(function() {
+                $("#ads").load("https://apurofutbol.net/html/ads.html");
+            });
+         </script>
+</div>
+
+
+<div id="footer"></div>
+<script>
+            $(document).ready(function() {
+                $("#footer").load("https://apurofutbol.net/html/footer.html");
+            });
+         </script>
+</div>
+
+</body>
+</html>

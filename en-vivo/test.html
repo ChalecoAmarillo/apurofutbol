@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Sitio con Twitch y Twitter</title>
+    <script src="https://cdn.jsdelivr.net/npm/tmi.js@1.7.4/dist/tmi.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+        #jwplayer, iframe {
+            margin: 20px 0;
+        }
+        iframe {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <!-- Reproductor JWPlayer -->
+    <div id="jwplayer"></div>
+    <script>
+        jwplayer("jwplayer").setup({
+            file: "URL_DE_TU_VIDEO",
+            width: "100%",
+            aspectratio: "16:9"
+        });
+    </script>
+
+    <!-- iFrame del chat de Twitch -->
+    <iframe src="https://www.twitch.tv/embed/elnuevoemperador/chat?darkpopout&no-mobile-redirect=true&parent=apurofutbol.net" frameborder="0" scrolling="no" height="500" width="350"></iframe>
+
+    <!-- iFrame para el contenido de Twitter -->
+    <iframe id="twitterIframe" width="600" height="400"></iframe>
+
+    <script>
+        // Configuración de la conexión al chat de Twitch
+        const client = new tmi.Client({
+            channels: ['elnuevoemperador']
+        });
+
+        client.connect().catch(console.error);
+
+        // Escuchar mensajes en el chat
+        client.on('message', (channel, tags, message, self) => {
+            if(self) return; // Ignorar mensajes del bot
+
+            // Comprobar si el mensaje contiene el comando !x
+            if(message.startsWith('!x ')) {
+                // Extraer el enlace de Twitter
+                const twitterLink = message.slice(3).trim();
+                // Validar que sea un enlace de Twitter
+                if(/^https:\/\/x\.com\/.+/.test(twitterLink)) {
+                    // Actualizar el iframe con el enlace de Twitter
+                    document.getElementById('twitterIframe').src = twitterLink;
+                }
+            }
+        });
+
+        // Manejar errores de conexión
+        client.on('connected', (address, port) => {
+            console.log(`Conectado al chat de Twitch en ${address}:${port}`);
+        });
+
+        client.on('disconnected', (reason) => {
+            console.error(`Desconectado del chat de Twitch: ${reason}`);
+        });
+    </script>
+</body>
+</html>
