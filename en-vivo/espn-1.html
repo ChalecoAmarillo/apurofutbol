@@ -80,21 +80,9 @@ name="iframe" frameborder="0" scrolling="no" allowfullscreen="">Cargando reprodu
             <!-- Columna secundaria CHAT -->
             <div class="col-md-3 col-sm-12 order-sm-2 p-0 m-0 col-custom col-sidebar" style="background-color: #dcdcdc; height: 100vh">
 
-<iframe id="miIframe" scrolling="no" width="100%" height="100%" allowfullscreen="" src=""></iframe>
+<iframe id="miIframe" scrolling="no" width="100%" height="100%" allowfullscreen="" src="https://vivo.apurofutbol.net/chat/chatsmart.html"></iframe>
 
-<script>
-    // Función para obtener el valor del parámetro de la URL
-    function obtenerParametroUrl(nombre) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(nombre);
-    }
 
-    // Obtener el valor del parámetro "id" de la URL
-    var videoId = obtenerParametroUrl("id");
-
-    // Asignar el valor del parámetro "id" al src del iframe en chat.html
-    $("#miIframe").attr("src", "https://vivo.apurofutbol.net/chat/chatsmart.html?id=" + encodeURIComponent(videoId));
-</script>
 
   
             </div>
