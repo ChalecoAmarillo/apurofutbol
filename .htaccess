@@ -1,0 +1,84 @@
+AddDefaultCharset UTF-8
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.apurofutbol\.net [NC]
+RewriteRule ^(.*)$ http://apurofutbol.net/$1 [L,R=301]
+    RewriteBase /
+    
+RewriteRule ^home/(.*)$ /$1 [L]
+RewriteRule ^online/(.*)$ /$1 [L]
+RewriteRule ^ver/(.*)$ /$1 [L]
+RewriteRule ^ver-directo/(.*)$ /$1 [L]
+RewriteRule ^portada/(.*)$ /$1 [L]
+RewriteRule ^tv/(.*)$ /$1 [L]
+RewriteRule ^tv1/(.*)$ /$1 [L]
+
+RewriteRule ^granhermanotg$ /en-vivo/granhermanotg [L]
+RewriteRule ^granhermano$ /en-vivo/granhermano [L]
+RewriteRule ^chat/chat\.html$ /chat/chatsmart.html [R=301,L]
+RewriteRule ^dazn\.html$ /embed/dazn.html [R=301,L]
+RewriteRule ^en-vivo/tnt-sports$ /en-vivo/tnt-sports-online [R=301,L]
+RewriteRule ^starjwc4.html$ /embed2/starjwc4.html [R=301,L]
+RewriteRule ^flow.html$ /embed2/flow.html [R=301,L]
+RewriteRule ^hbomax.html$ /embed2/hbomax.html [R=301,L]
+RewriteRule ^court.php$ /embed2/court.php [R=301,L]
+RewriteCond %{HTTP_HOST} ^tv\.apurofutbol\.net$ [NC]
+
+RewriteCond %{QUERY_STRING} ^r=aHR0cHM6Ly9hbHdheXNkb21haW4wMS5vbmxpbmUvY29iby5odG1sP2lkPUVTUE5fRkxPVw$
+RewriteRule ^embed/eventos$ https://apurofutbol.net/en-vivo/espn-1? [R=301,L]
+
+RewriteCond %{QUERY_STRING} r=aHR0cHM6Ly9hbHdheXNkb21haW4wMS5vbmxpbmUvY29iby5odG1sP2lkPVRWUFVCTElDQQ==
+RewriteRule ^embed/eventos$ https://apurofutbol.net/en-vivo/tv-publica? [R=301,L]
+
+RewriteCond %{QUERY_STRING} r=aHR0cHM6Ly9saWJyZWZ1dGJvbHR2aGQuY29tL3N0YXItcGx1cy1icg==
+RewriteRule ^embed/eventos$ https://apurofutbol.net/star-plus-br [L,R=301]
+
+RewriteCond %{QUERY_STRING} ^r=aHR0cHM6Ly9mb3JsZXNzbWFrZS5zdG9yZS9jb2JvLmh0bWw/aWQ9RVNQTl9GTE9X$
+RewriteRule ^embed/eventos$ /en-vivo/espn-1/? [R=301,L]
+ 
+    # Eliminar la barra al final de las URL
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+    # Agregar la extensión .html
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^([^\.]+)/?$ $1.html [NC,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+    Header set Content-Security-Policy "frame-ancestors 'self' apurofutbol.net embed.apurofutbol.net clarovideo.apurofutbol.net directvapg.co tv.apurofutbol.net embed.directvapg.co"
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Agregar el parámetro ?new a la URL cuando se accede a chat/chat.html
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteCond %{QUERY_STRING} !^new [NC]
+    RewriteRule ^chat/chat\.html$ $0?new [QSA,L]
+</IfModule>
+
+<FilesMatch "ads\.js$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+</FilesMatch>
+<FilesMatch "cobo\.html$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+</FilesMatch>
+<FilesMatch "agenda2\.html$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+</FilesMatch>
+<FilesMatch "/embed/cv\.html$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+</FilesMatch>
+

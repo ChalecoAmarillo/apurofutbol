@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Puro Fútbol - Star Plus Brasil en vivo</title>
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="A Puro Fútbol" />
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="msapplication-TileImage" content="https://apurofutbol.net/favicon.png">
+    <meta name="description" content="Ver Star Plus Brasil en vivo y en directo online. En A Puro Fútbol mira todos los partidos gratis por Internet">
+    <meta property="og:title" content="Click para ver Star Plus Brasil en VIVO y en DIRECTO por Internet gratis - A Puro Fútbol" />
+    <meta property="og:description" content="A Puro Fútbol. Ver Star Plus Brasil en VIVO y en directo ONLINE gratis por Internet" />
+    <meta property="og:url" content="https://apurofutbol.net/star-plus" />
+    <link rel="canonical" href="https://apurofutbol.net/star-plus" />
+    <meta property="og:image" content="https://apurofutbol.net/img/logo-canal/logo-starplus.png" />
+    <link rel="shortcut icon" href="https://apurofutbol.net/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://apurofutbol.net/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="https://apurofutbol.net/assets/css/portada.css">
+    <link rel="stylesheet" href="https://apurofutbol.net/assets/css/starp.css">
+    <link rel="stylesheet" href="https://apurofutbol.net/assets/css/style.css">
+    <link rel="stylesheet" href="https://apurofutbol.net/assets/css/responsive.css">
+    <link rel="icon" href="https://apurofutbol.net/assets/img/logomini.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Incluye el archivo JavaScript con el timestamp -->
+    <script>
+        var timestamp = new Date().getTime(); // Obtiene el timestamp actual
+        document.write('<script type="text/javascript" src="/assets/js/horario.js?v=' + timestamp + '"></scr' + 'ipt>');
+    </script>
+    <meta http-Equiv="Cache-Control" Content="no-cache" />
+    <meta http-Equiv="Pragma" Content="no-cache" />
+    <meta http-Equiv="Expires" Content="0" />
+    <script>
+        $(document).ready(function() {
+            $.get("https://apurofutbol.net/html/head.html", function(data) {
+                $("head").append(data);
+            });
+        });
+    </script>
+
+</head>
+<body>
+<div id="header"></div>
+<script>
+    $(document).ready(function() {
+        $("#header").load("https://apurofutbol.net/html/header.html");
+    });
+</script>
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:10px">
+    <center>
+        <img src="https://apurofutbol.net/assets/img/starplus.png" alt="Star+" width="250" height="71">
+    </center>
+    <br>
+    <div id="eventos"></div>
+    <br>
+    <div class="sharethis-inline-share-buttons"></div>
+</div>
+
+   <script>
+        function eventos() {
+            var x = Math.random().toString(36).substring(7);
+
+            $.ajax({
+                url: "https://apurofutbol.net/scrapstarbr.json?" + x,
+                type: "get",
+                success: function (arr) {
+                    var content = '';
+
+                    for (var i = 0; i < arr.length; i++) {
+                        if (i % 4 == 0) {
+                            if (i != 0)
+                                content += '</div>';
+
+                            content += '<div class="w3-row-padding w3-padding-16 w3-center" id="copa">';
+                        }
+                        var obj = arr[i];
+                        url = obj['url'];
+                        if (url !== "#") {
+                            let nurl = url.replace("/embed/eventos/?r=", "");
+			    var decodedData = atob(nurl);
+	
+                            let wurl = decodedData.replace("https://fulldeportes.live/star.html?get=", "");
+//console.log(wurl);
+                            wurl = "https://apurofutbol.net/star_jwp.html?get=" + wurl;
+                            let furl = btoa(wurl);
+                            //console.log(furl);
+                            url = "https://apurofutbol.net/embed/eventosstar?r=" + furl;
+                        }
+
+                        if (obj['status'] == "FINALIZADO" || obj['status'] == "EN VIVO")
+                            status = obj['status'];
+                        else
+                            status = 'HOY | <span class="t">' + obj['status'] + '</span> hs';
+
+                        if (status == "EN VIVO")
+                            color = "danger";
+                        else
+                            color = "primary";
+
+                        content += '<div class="w3-quarter"><a href="' + url + '"><img class="radio" src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/star/' + obj['img'] + '/scale?width=500&aspectRatio=1.78&format=jpeg" alt="Star+" style="width:100%" class="w3-hover-opacity"></a><a class="btn btn-block btn-' + color + '" href="' + url + '">' + status + '</a> <div class="w3-card-4"><p>' + obj['league'] + '</p><p><b>' + obj['title'] + '</b></p></div></div>';
+
+                        if (i == arr.length - 1)
+                            content += '</div>';
+                    }
+
+                    $("#eventos").html(content);
+
+                    // Llamar a guardaHorario después de actualizar el contenido
+                    guardaHorario();
+
+                    // Llamar a dT después de que el contenido se haya actualizado
+                    dT();
+                }
+            });
+        }
+
+        eventos();
+
+        window.setInterval(function () {
+            eventos();
+        }, 60000);
+    </script>
+
+
+
+<div id="footer"></div>
+<script>
+            $(document).ready(function() {
+                $("#footer").load("https://apurofutbol.net/html/footer.html");
+            });
+         </script>
+</div>
+
+</body>
+</html>
+

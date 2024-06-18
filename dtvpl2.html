@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dtvpl2</title>
+</head>
+<body>
+
+<script>
+    // Función para obtener el valor de la variable 'id' de la URL
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    // Obtener el valor de 'id' de la URL
+    var idValue = getParameterByName('id');
+
+    // Construir la URL de destino con la variable 'id'
+    var redirectUrl = 'https://embed.directvapg.co/dtvpl2.html?id=' + idValue;
+
+    // Realizar la redirección
+    window.location.href = redirectUrl;
+</script>
+
+</body>
+</html>

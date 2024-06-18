@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+	<meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> A Puro Fútbol - Star Plus Premium</title>
+<meta property="og:locale" content="es_ES" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="A Puro Fútbol" />
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+<meta name="msapplication-TileImage" content="https://apurofutbol.net/favicon.png">
+
+<meta name="description" content="Ver Star Plus en vivo y en directo online. En A Puro Fútbol mira todos los partidos gratis por Internet">
+<meta property="og:title" content="Click para ver Star Plus en VIVO y en DIRECTO por Internet gratis - A Puro Fútbol" />
+<meta property="og:description" content="A Puro Fútbol. Ver Star Plus en VIVO y en directo ONLINE gratis por Internet" />
+<meta property="og:url" content="https://apurofutbol.net/star-plus" />
+<link rel="canonical" href="https://apurofutbol.net/star-plus" />
+<meta property="og:image" content="https://apurofutbol.net/img/logo-canal/logo-starplus.png" />
+    <!-- favicon -->
+    <link rel="shortcut icon" href="https://apurofutbol.net/favicon.png" type="image/x-icon">
+        <!-- bootstrap -->
+      
+ 
+        <!-- fontawesome icon  -->
+        <link rel="stylesheet" href="https://apurofutbol.net/assets/css/fontawesome.min.css">
+        <!-- magnific popup -->
+        <link rel="stylesheet" href="https://apurofutbol.net/assets/css/magnific-popup.css">
+        <link rel="stylesheet" href="https://apurofutbol.net/assets/css/odometer.min.css">
+        <!-- stylesheet -->
+        <link rel="stylesheet" href="https://apurofutbol.net/assets/css/style.css">
+        <!-- responsive -->
+        <link rel="stylesheet" href="https://apurofutbol.net/assets/css/responsive.css">
+        <link rel="icon" href="https://apurofutbol.net/assets/img/logomini.ico">
+<script type="text/javascript" src="https://apurofutbol.net/assets/js/horario.js?v"></script>
+        
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    </head>
+<body>  
+    <style>
+        /* Reset de estilos */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #111;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Estilos para el logo */
+        #logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 999;
+            width: 150px; /* Ajustar el ancho del logo */
+            margin-bottom: 20px; /* Ajustar el espacio debajo del logo */
+        }
+
+        /* Estilos para el texto de páginas recomendadas */
+        #paginas-recomendadas {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 999;
+        }
+
+        .evento {
+            margin: 20px; /* Ajustar la separación entre las imágenes */
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            width: calc(25% - 40px); /* Ajustar el ancho de las imágenes y la separación */
+            background-color: #222;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .evento:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        .evento img {
+            width: 100%;
+            height: auto;
+            max-height: 250px; /* Ajustar el tamaño máximo de las imágenes */
+            object-fit: cover;
+        }
+
+        .evento .card-body {
+            padding: 10px;
+        }
+
+        .btn {
+            margin-bottom: 5px;
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-en-vivo {
+            background-color: #ff0000;
+            border-color: #ff0000;
+            border-width: 2px;
+        }
+
+        .evento .hora-hoy {
+            background-color: #ff9900;
+            border-color: #ff9900;
+            border-width: 2px;
+        }
+
+        .evento h3,
+        .evento h5 {
+            margin: 5px 0;
+            color: #fff;
+        }
+
+        .evento .btn:not(.btn-en-vivo) {
+            background-color: #333;
+            border-color: #333;
+        }
+
+        .evento a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        footer {
+            background-color: #222;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .telegram-buttons {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .telegram-button {
+            display: inline-block;
+            background-color: #0088cc;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            position: relative; /* Añadido para posición relativa */
+            overflow: hidden; /* Añadido para ocultar el contenido que se desborda */
+        }
+
+        /* Animación del botón de Telegram */
+        .telegram-button:hover {
+            transform: scale(1.1); /* Escala el botón al 110% del tamaño original */
+        }
+
+        /* Estilo del efecto de escala */
+        .telegram-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%; /* Ajusta la anchura al 300% del botón original */
+            height: 300%; /* Ajusta la altura al 300% del botón original */
+            background-color: rgba(255, 255, 255, 0.1); /* Color del efecto de escala */
+            border-radius: 50%; /* Haz que el efecto de escala sea circular */
+            transition: width 0.3s ease, height 0.3s ease; /* Animación de la escala */
+            transform: translate(-50%, -50%); /* Centra el efecto de escala */
+            z-index: 0; /* Asegura que esté detrás del contenido del botón */
+        }
+
+        /* Estilo para cambiar la opacidad del efecto de escala */
+        .telegram-button:hover::before {
+            width: 0; /* Reduce la anchura a 0 */
+            height: 0; /* Reduce la altura a 0 */
+        }
+
+        /* Estilo para el texto del botón */
+        .telegram-button span {
+            position: relative; /* Añadido para la posición relativa */
+            z-index: 1; /* Asegura que esté delante del efecto de escala */
+        }
+
+        @media (max-width: 768px) {
+            .evento {
+                width: calc(90% - 80px); /* Ajustar el ancho de las imágenes y la separación */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .evento {
+                width: calc(140% - 40px); /* Ajustar el ancho de las imágenes y la separación */
+            }
+        }
+    </style>
+<!-- Top menu -->
+
+<div id="header"></div>
+	<script>
+            $(document).ready(function() {
+                $("#header").load("https://apurofutbol.net/html/header.html");
+            });
+         </script>
+
+
+<!-- !PAGE CONTENT! -->
+<body class="dark-mode container">
+    <div class="container">
+        <img src="https://framerusercontent.com/images/UQM3QrfJm8PEALUClVF5MtssQs.png?scale-down-to=512" alt="Star+" width="300" height="60">
+        <div class="container" id="eventos"></div>
+        <div class="row" id="eventos"></div>
+        <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=641f722cfbfd84001b9fbfe8&product=inline-share-buttons&source=platform" async="async"></script>
+        <div class="sharethis-inline-share-buttons"></div>
+        <center>
+
+        </center>
+    </div>
+    <h5>LIGA 1 MAX 2024 &copy; Todos los derechos reservados.</h5>
+    <div class="telegram-buttons">
+        <a class="telegram-button" href="https://t.me/liga1maxpe">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/240px-Telegram_logo.svg.png" alt="Telegram Icon" width="30" height="30">
+            Únete al grupo de Telegram
+        </a>
+    </div>
+    <script>
+        function eventos() {
+            var x = Math.random().toString(36).substring(7);
+
+            $.ajax({
+                url: "https://api.codetabs.com/v1/proxy/?quest=https://liga1maxtvhd.com/liga1max.json?" + x,
+                type: "get",
+                success: function (arr) {
+                    var content = '';
+                    for (var i = 0; i < arr.length; i++) {
+                        var obj = arr[i];
+                        url = obj['url'];
+                        if (url !== "#") {
+                            let nurl = url.replace("/embed/eventos/?r=", "");
+                            nurl = atob(nurl);
+                            let wurl = nurl.replace("", "");
+                            wurl = "" + wurl;
+                            let furl = btoa(wurl);
+                            console.log(furl);
+                            url = "/eventos.html?r=" + furl;
+                        } else {
+                            //console.log('Link no está listo: ' + url);
+                        }
+                        status = obj['status'];
+                        if (status == "EN VIVO") {
+                            hora = '<button type="button" class="btn btn-en-vivo me-1 mb-1">EN VIVO</button>';
+                        } else if (status == "FINALIZADO") {
+                            hora = '<button type="button" class="btn btn-dark me-1 mb-1">FINALIZADO</button>';
+                        } else {
+                            hora = '<button type="button" class="btn btn-dark me-1 mb-1">HOY | <span class="t">' + status + '</span> hs</button>';
+                        }
+                        content += '<div class="evento"><div class="no-section no-mt-2"><a href="' + url + '"><div class="card"><img src="https://iili.io/' + obj['img'] + '.png" class="card-img-top" alt="image" /><div class="card-body">' + hora + '<h3>' + obj['title'] + '</h3><h5 class="card-subtitle">' + obj['league'] + '</h5></div></div></a></div></div>';
+                    }
+                    $("#eventos").html(content);
+                    guardaHorario();
+                    dT();
+                }
+            })
+        }
+
+        eventos();
+
+        window.setInterval(function () {
+            eventos();
+        }, 60000);
+    </script></div>
+<!-- Footer -->
+</body>
+</html>
+
