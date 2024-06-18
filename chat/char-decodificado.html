@@ -1,0 +1,124 @@
+<style type="text/css">
+body {
+   margin: 0;
+   padding: 0;
+background-color: #0e0e10;
+}
+iframe {
+    border: 0;
+}
+#campoTextoDiv {
+    margin-top: 10px;
+display: block;
+    position: absolute;
+    background-color: #18181b;
+    width: 100%;
+    padding: 5px;
+}
+#mostrarCampoTexto{
+    position: absolute;
+    width: 100%;
+    padding: 10px;
+}
+
+</style>
+
+
+
+
+
+
+  <script>
+    window.onload = function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const defaultChannel = urlParams.get('default');
+      const canal = urlParams.get('canal');
+      const iframe = document.getElementById('chat_embed');
+      const canalValue = (canal !== "null" && canal !== null) ? canal : null;
+
+
+
+      if (canalValue !== null) {
+        const newSrc = `https://www.twitch.tv/embed/${canalValue}/chat?darkpopout&no-mobile-redirect=true&parent=apurofutbol.net`;
+        iframe.src = newSrc;
+      } else if (defaultChannel !== null && defaultChannel !== undefined) {
+        const defaultSrc = `https://www.twitch.tv/embed/${defaultChannel}/chat?darkpopout&no-mobile-redirect=true&parent=apurofutbol.net`;
+        iframe.src = defaultSrc;
+      } else {
+        iframe.src = "";
+      }
+    };
+
+    function cambiarChat() {
+      const campoTexto = document.getElementById('campoTexto');
+      const nuevoCanal = campoTexto.value;
+
+      if (nuevoCanal) {
+        const iframe = document.getElementById('chat_embed');
+        const newSrc = `https://www.twitch.tv/embed/${nuevoCanal}/chat?darkpopout&no-mobile-redirect=true&parent=apurofutbol.net`;
+        iframe.src = newSrc;
+        iframe.style.display = 'block';
+      }
+    }
+
+    function mostrarCampoTexto() {
+      document.getElementById("mostrarCampoTexto").style.display = "none";
+      document.getElementById("campoTextoDiv").style.display = "block";
+    }
+
+    async function compartirURL() {
+      const iframe = document.getElementById('chat_embed');
+      const canal = iframe.src.split('/')[4];
+      const parentURL = window.parent.location.href;
+
+      let url;
+
+      if (parentURL.includes('?')) {
+        const queryParams = parentURL.split('?')[1];
+        const decodedParams = new URLSearchParams(queryParams);
+        const decodedQueryString = Array.from(decodedParams.keys())
+          .map(key => `${key}=${decodeURIComponent(decodedParams.get(key))}`)
+          .join('&');
+
+        url = parentURL.split('?')[0] + '?chat=' + canal + '&' + decodedQueryString;
+      } else {
+        url = parentURL.split('?')[0] + '?chat=' + canal;
+      }
+
+      try {
+        const response = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(url)}`);
+        if (response.ok) {
+          const shortURL = await response.text();
+
+          // Copiar al portapapeles
+          copyToClipboard(shortURL);
+
+          // Mostrar mensaje
+          alert('Se ha copiado al portapapeles el link del stream mas el chat personalizado. Puedes compartirlo en tus redes sociales!!!  ' + shortURL);
+        } else {
+          console.error('Error al acortar la URL:', response.status);
+        }
+      } catch (error) {
+        console.error('Error de red:', error);
+      }
+    }
+
+    function copyToClipboard(text) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+    }
+  </script>
+
+  <div id="campoTextoDiv" style="display: none;">
+    <input type="text" id="campoTexto" placeholder="Introduce el canal de Twitch">
+    <button id="okButton" onclick="cambiarChat()">OK</button>
+    <button id="compartirButton" onclick="compartirURL()">COMPARTIR</button>
+  </div>
+
+  <button id="mostrarCampoTexto" onclick="mostrarCampoTexto()">Cambiar chat</button>
+
+  <iframe id="chat_embed" style="width: 100%; height: 100%; display: block;" allowfullscreen></iframe>

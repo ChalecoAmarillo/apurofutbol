@@ -1,0 +1,319 @@
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0e0e10;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Para evitar el desplazamiento horizontal */
+        }
+        iframe {
+            border: 0;
+        }
+        #campoTextoDiv {
+            margin-top: 10px;
+            display: none;
+            position: absolute;
+            background-color: #18181b;
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+        #mostrarCampoTexto {
+            position: absolute;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+#compartirBtn
+{
+
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+            transition: opacity 0.5s; /* Agregamos una transición para suavizar el cambio de opacidad */
+        }
+        #compartirBtn.clicked {
+            opacity: 0.5; /* Opacidad reducida cuando la clase "clicked" está presente */
+        }
+
+        #insertarVideoBtn {
+
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+            transition: opacity 0.5s; /* Agregamos una transición para suavizar el cambio de opacidad */
+        }
+        #insertarVideoBtn.clicked {
+            opacity: 0.5; /* Opacidad reducida cuando la clase "clicked" está presente */
+        }
+        #insertarCampoTexto {
+            width: 80%;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        #insertarBtn {
+            width: 18%;
+            padding: 5px;
+            background-color: #2ecc71;
+            color: #fff;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+        #videoChatContainer {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+        #videoContainer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            box-sizing: border-box;
+            transition: height 0.5s; /* Agregamos una transición para suavizar el cambio de altura */
+        }
+        #chatContainer {
+            position: absolute;
+            top: 100vh;
+            left: 0;
+            width: 100%;
+            height: 0;
+            box-sizing: border-box;
+            transition: height 0.5s; /* Agregamos una transición para suavizar el cambio de altura */
+        }
+    </style>
+
+    <div id="videoChatContainer">
+<div style="display: flex; align-items: center;">
+    <div id="insertarVideoBtn" onclick="mostrarCampoTexto()">Insertar video</div>
+</div>
+        <div id="campoTextoDiv">
+            <input type="text" id="insertarCampoTexto" placeholder="Coloque el link del video (YouTube o Twitch)">
+            <button id="insertarBtn" onclick="insertarVideo()">Insertar</button>
+        </div>
+
+        <div id="videoContainer">
+            <!-- Aquí puedes mantener el chat original -->
+            <iframe id="chat_embed_original" style="width: 100%; height: 100%;" allowfullscreen="" src="https://www.twitch.tv/embed/elnuevoemperador/chat?darkpopout&amp;no-mobile-redirect=true&amp;parent=apurofutbol.net"></iframe>
+        </div>
+
+        <div id="chatContainer">
+            <!-- Aquí se cargará el chat correspondiente al nuevo video -->
+        </div>
+    </div>
+
+
+
+
+
+<script>
+    window.onload = function () {
+        // Obtener el parámetro "id" de la URL
+        var urlParams = new URLSearchParams(window.location.search);
+        var videoId = urlParams.get('id');
+
+        // Verificar si hay un parámetro "id" y si es un enlace de YouTube o Twitch
+        if (videoId && (videoId.includes("youtube.com") || videoId.includes("twitch.tv"))) {
+            insertarVideoPorId(videoId);
+        }
+    };
+
+    function insertarVideoPorId(videoLink) {
+        var chatContainer = document.getElementById("chatContainer");
+        var videoContainer = document.getElementById("videoContainer");
+
+        // Verificar si es un enlace de YouTube
+        if (videoLink.includes("youtube.com")) {
+            var youtubeVideoId = obtenerIdYouTube(videoLink);
+            if (youtubeVideoId !== "") {
+                var embedUrl = `https://www.youtube.com/embed/${youtubeVideoId}`;
+                var iframeCode = `<iframe width="100%" height="100%" src="${embedUrl}" frameborder="0" allowfullscreen></iframe>`;
+                videoContainer.innerHTML = iframeCode;
+
+                var chatEmbed = document.createElement("iframe");
+                chatEmbed.style.width = "100%";
+                chatEmbed.style.height = "100%";
+                chatEmbed.src = `https://www.youtube.com/live_chat?v=${youtubeVideoId}&embed_domain=apurofutbol.net`;
+                chatContainer.innerHTML = '';
+                chatContainer.appendChild(chatEmbed);
+
+                videoContainer.style.height = "30vh";
+                chatContainer.style.top = "30vh";
+                chatContainer.style.height = "70vh";
+
+                return;
+            }
+        }
+
+        // Verificar si es un enlace de Twitch
+        if (videoLink.includes("twitch.tv")) {
+            var twitchChannelName = obtenerNombreCanalTwitch(videoLink);
+            if (twitchChannelName !== "") {
+                var embedUrl = `https://player.twitch.tv/?channel=${twitchChannelName}&parent=apurofutbol.net`;
+                var iframeCode = `<iframe width="100%" height="100%" src="${embedUrl}" frameborder="0" allowfullscreen></iframe>`;
+                videoContainer.innerHTML = iframeCode;
+
+                var chatEmbed = document.createElement("iframe");
+                chatEmbed.style.width = "100%";
+                chatEmbed.style.height = "100%";
+                chatEmbed.src = `https://www.twitch.tv/embed/${twitchChannelName}/chat?darkpopout&no-mobile-redirect=true&parent=apurofutbol.net`;
+                chatContainer.innerHTML = '';
+                chatContainer.appendChild(chatEmbed);
+
+                videoContainer.style.height = "30vh";
+                chatContainer.style.top = "30vh";
+                chatContainer.style.height = "70vh";
+
+                return;
+            }
+        }
+
+        // Si no es un enlace de YouTube ni de Twitch, mostrar una alerta
+        alert("El parámetro 'id' no es un enlace de YouTube o Twitch válido");
+    }
+
+        function mostrarCampoTexto() {
+            var btnInsertarVideo = document.getElementById("insertarVideoBtn");
+            btnInsertarVideo.style.display = "none";
+            btnInsertarVideo.classList.add("clicked"); // Agregamos la clase "clicked"
+            document.getElementById("campoTextoDiv").style.display = "block";
+        }
+
+        function obtenerNombreCanalTwitch(url) {
+            var channelName = "";
+            
+            // Intentar extraer el nombre del canal de Twitch desde la URL
+            var match = url.match(/twitch\.tv\/([^\/?]+)/);
+            if (match) {
+                channelName = match[1];
+            }
+
+            return channelName;
+        }
+
+        function obtenerIdYouTube(url) {
+            var videoId = "";
+
+            // Intentar extraer el identificador del video desde la URL del video de YouTube
+            var match = url.match(/[?&]v=([^&]+)/);
+            if (match) {
+                videoId = match[1];
+            } else {
+                // Intentar extraer el identificador del video desde la URL abreviada de YouTube
+                var matchShort = url.match(/(?:\/)([^\/]{11})/);
+                if (matchShort) {
+                    videoId = matchShort[1];
+                }
+            }
+
+            return videoId;
+        }
+
+        function insertarVideo() {
+            var videoLink = document.getElementById("insertarCampoTexto").value;
+            var chatContainer = document.getElementById("chatContainer");
+            var videoContainer = document.getElementById("videoContainer");
+
+            // Verificar si es un enlace de YouTube
+            if (videoLink.includes("youtube.com")) {
+                // Obtener el identificador del video de YouTube desde la URL
+                var youtubeVideoId = obtenerIdYouTube(videoLink);
+
+                // Verificar si se pudo obtener el identificador
+                if (youtubeVideoId !== "") {
+                    var embedUrl = `https://www.youtube.com/embed/${youtubeVideoId}`;
+                    var iframeCode = `<iframe width="100%" height="100%" src="${embedUrl}" frameborder="0" allowfullscreen></iframe>`;
+                    videoContainer.innerHTML = iframeCode;
+
+                    // Cargar el chat de YouTube
+                    var chatEmbed = document.createElement("iframe");
+                    chatEmbed.style.width = "100%";
+                    chatEmbed.style.height = "100%";
+                    chatEmbed.src = `https://www.youtube.com/live_chat?v=${youtubeVideoId}&embed_domain=apurofutbol.net`;
+                    chatContainer.innerHTML = '';
+                    chatContainer.appendChild(chatEmbed);
+
+                    // Ajustar la altura después de insertar el video
+                    videoContainer.style.height = "30vh";
+                    chatContainer.style.top = "30vh";
+                    chatContainer.style.height = "70vh";
+
+                    // Restaurar la visibilidad del botón "Insertar video"
+                    var btnInsertarVideo = document.getElementById("insertarVideoBtn");
+                    btnInsertarVideo.style.display = "block";
+                    btnInsertarVideo.classList.remove("clicked"); // Removemos la clase "clicked"
+                    document.getElementById("campoTextoDiv").style.display = "none";
+
+                    return;
+                }
+            }
+
+            // Verificar si es un enlace de Twitch
+            if (videoLink.includes("twitch.tv")) {
+                // Obtener el nombre del canal de Twitch
+                var twitchChannelName = obtenerNombreCanalTwitch(videoLink);
+
+                // Verificar si se pudo obtener el nombre del canal
+                if (twitchChannelName !== "") {
+                    // Construir la URL del embed de Twitch para el video y el chat
+                    var embedUrl = `https://player.twitch.tv/?channel=${twitchChannelName}&parent=apurofutbol.net`;
+                    var iframeCode = `<iframe width="100%" height="100%" src="${embedUrl}" frameborder="0" allowfullscreen></iframe>`;
+                    videoContainer.innerHTML = iframeCode;
+
+                    // Cargar el chat de Twitch
+                    var chatEmbed = document.createElement("iframe");
+                    chatEmbed.style.width = "100%";
+                    chatEmbed.style.height = "100%";
+                    chatEmbed.src = `https://www.twitch.tv/embed/${twitchChannelName}/chat?darkpopout&no-mobile-redirect=true&parent=apurofutbol.net`;                    chatContainer.innerHTML = '';
+                    chatContainer.appendChild(chatEmbed);
+
+                    // Ajustar la altura después de insertar el video
+                    videoContainer.style.height = "30vh";
+                    chatContainer.style.top = "30vh";
+                    chatContainer.style.height = "70vh";
+
+                    // Restaurar la visibilidad del botón "Insertar video"
+                    var btnInsertarVideo = document.getElementById("insertarVideoBtn");
+                    btnInsertarVideo.style.display = "block";
+                    btnInsertarVideo.classList.remove("clicked"); // Removemos la clase "clicked"
+                    document.getElementById("campoTextoDiv").style.display = "none";
+
+                    return;
+                }
+            }
+
+            // Si no es un enlace de YouTube ni de Twitch, mostrar una alerta
+            alert("Solo se permiten videos de YouTube o Twitch");
+        }
+
+    // Función para obtener la URL actual con el parámetro "id" si está presente
+    function obtenerUrlActual() {
+        var url = window.parent.location.href;  // Cambio aquí para obtener la URL del padre (index.html)
+        var videoId = obtenerIdVideo();
+
+        // Agregar el parámetro "id" si está presente
+        if (videoId) {
+            url += (url.includes("?") ? "&" : "?") + "id=" + encodeURIComponent(videoId);
+        }
+
+        return url;
+    }
+
+    // ... (código anterior)
+
+    // Función para mostrar una alerta con la URL actual
+    function compartirUrl() {
+        var currentUrl = obtenerUrlActual();
+        alert("URL compartida:\n" + currentUrl);
+    }
+    </script>
